@@ -1408,6 +1408,10 @@ bool CCDSim::UpdateCCDFrame(int x, int y, int w, int h)
 
 bool CCDSim::UpdateCCDBin(int hor, int ver)
 {
+    if (hor == 0 || ver == 0) {
+        LOGF_ERROR("%dx%d binning is not supported.", hor, ver);
+        return false;
+    }
     if (PrimaryCCD.getSubW() % hor != 0 || PrimaryCCD.getSubH() % ver != 0)
     {
         LOGF_ERROR("%dx%d binning is not supported.", hor, ver);
@@ -1423,6 +1427,10 @@ bool CCDSim::UpdateCCDBin(int hor, int ver)
 
 bool CCDSim::UpdateGuiderBin(int hor, int ver)
 {
+    if (hor == 0 || ver == 0) {
+        LOGF_ERROR("%dx%d binning is not supported.", hor, ver);
+        return false;
+    }
     if (GuideCCD.getSubW() % hor != 0 || GuideCCD.getSubH() % ver != 0)
     {
         LOGF_ERROR("%dx%d binning is not supported.", hor, ver);
